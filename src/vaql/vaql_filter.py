@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Callable, override
@@ -214,3 +215,9 @@ class VAQLFilterLineEdit(QLineEdit):
                         request_focus = True
                     ))
                     self.filters_changed_callback()
+
+
+class FilterApplicator[T](ABC):
+    @abstractmethod
+    def apply_filter(self, all_filters: list[VAQLFilter]) -> T:
+        pass
